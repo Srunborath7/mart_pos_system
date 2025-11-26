@@ -7,7 +7,7 @@ import Register from "./login/Register";
 import Category from "./pages/CategoryPage";
 import BrandPage from "./pages/BrandPage";
 import ProductPage from "./pages/ProductPage";
-import PosPage from "./pages/Pospage";
+import PosPage from "./pages/PosPage";
 import UserPage from "./pages/UserPage";
 import CustomerPage from "./pages/CustomerPage";
 import OrderPage from "./pages/OrderPage";
