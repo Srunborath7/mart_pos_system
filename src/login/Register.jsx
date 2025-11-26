@@ -39,7 +39,6 @@ export default function Register() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white-950 via-white-800 to-white-900 overflow-hidden relative">
 
-      {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute w-64 h-64 bg-red-500/20 rounded-full top-10 left-10"
@@ -65,8 +64,6 @@ export default function Register() {
         <h2 className="text-2xl font-bold text-center mb-6">Create Account</h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
-          {/* Name */}
           <div>
             <label className="block mb-1 text-sm font-semibold">Full Name</label>
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
@@ -82,8 +79,6 @@ export default function Register() {
               />
             </div>
           </div>
-
-          {/* Email */}
           <div>
             <label className="block mb-1 text-sm font-semibold">Email</label>
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
@@ -99,8 +94,6 @@ export default function Register() {
               />
             </div>
           </div>
-
-          {/* Role */}
           <div>
             <label className="block mb-1 text-sm font-semibold">Role</label>
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
@@ -119,8 +112,6 @@ export default function Register() {
               </select>
             </div>
           </div>
-
-          {/* Password */}
           <div>
             <label className="block mb-1 text-sm font-semibold">Password</label>
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
@@ -136,8 +127,6 @@ export default function Register() {
               />
             </div>
           </div>
-
-          {/* Confirm Password */}
           <div>
             <label className="block mb-1 text-sm font-semibold">Confirm Password</label>
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
@@ -154,7 +143,6 @@ export default function Register() {
             </div>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-red-700 to-red-500 py-2 rounded-lg font-semibold hover:from-red-600 hover:to-red-400 transition-all"

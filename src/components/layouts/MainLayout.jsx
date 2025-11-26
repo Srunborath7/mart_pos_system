@@ -109,7 +109,6 @@ function Sidebar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
 
   return (
     <>
-      {/* MOBILE SIDEBAR */}
       <AnimatePresence>
         {isOpen && (
           <motion.aside
@@ -192,7 +191,6 @@ function Sidebar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
     </>
   );
 }
-
 
 function MainLayout() {
   const [isOpen, setIsOpen] = useState(false);
@@ -288,12 +286,12 @@ function MainLayout() {
                 <DropdownMenuLabel className="text-gray-500 text-sm">My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link to="/admin/profile" className="hover:bg-gray-100 rounded-md w-full block px-2 py-1">
+                  <Link to="/profile" className="hover:bg-gray-100 rounded-md w-full block px-2 py-1">
                     Profile
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/admin/team" className="hover:bg-gray-100 rounded-md w-full block px-2 py-1">
+                  <Link to="/team" className="hover:bg-gray-100 rounded-md w-full block px-2 py-1">
                     Team
                   </Link>
                 </DropdownMenuItem>

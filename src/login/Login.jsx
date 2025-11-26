@@ -50,8 +50,6 @@ function Login() {
       setValidate(res.errors);
       return;
     }
-
-    // Successful login
     if (res?.token) {
       dispatch(setToken(res.token));
       Swal.fire({
@@ -90,23 +88,18 @@ function Login() {
       >
         <Sparkles size={50} />
       </motion.div>
-
-      {/* Login Card */}
       <motion.div
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="z-10 relative rounded-2xl p-8 w-[380px] shadow-2xl overflow-hidden"
       >
-        {/* Background Animation */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-red-700 via-red-600 to-red-800"
           animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           style={{ backgroundSize: "200% 200%" }}
         />
-
-        {/* Content */}
         <div className="relative z-10 text-white">
           <div className="flex flex-col items-center mb-6">
             <motion.img
@@ -170,8 +163,6 @@ function Login() {
                   </FormItem>
                 )}
               />
-
-              {/* BUTTON */}
               <motion.div whileHover={{ scale: 1.05 }}>
                 <Button
                   type="submit"
