@@ -110,7 +110,7 @@ export default function ProductPage() {
       const res = await request("products", "get");
       const cate = await request("categories", "get");
       const brand = await request("brands", "get");
-      
+
       if (res) {
         setProduct(res.data)
       };
@@ -178,7 +178,7 @@ export default function ProductPage() {
       });
 
       setIsEdit(false);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -464,7 +464,7 @@ export default function ProductPage() {
                           src={
                             form.image instanceof File
                               ? URL.createObjectURL(form.image)
-                              : `${config.image_url}/${form.image}`
+                              : `${form.image_url}`
                           }
                           alt="Preview"
                           className="w-full h-full object-cover rounded-2xl"
@@ -535,13 +535,14 @@ export default function ProductPage() {
                       <select
                         className="border rounded-md px-3 py-2 w-full"
                         value={form.status ? "true" : "false"}
-                        onChange={(value) =>
-                          setForm({ ...form, status: value === "true" })
+                        onChange={(e) =>
+                          setForm({ ...form, status: e.target.value === "true" })
                         }
                       >
                         <option value="true">Available</option>
                         <option value="false">Not Available</option>
                       </select>
+
 
 
                     </div>
@@ -670,7 +671,7 @@ export default function ProductPage() {
                     <TableCell>
                       {item.image ? (
                         <div className="w-20 h-20 flex justify-center items-center rounded-lg">
-                          <img src={`${config.image_url}/${item.image}`} alt={item.name} className="w-20 h-20 object-cover rounded-lg border border-red-900/80" />
+                          <img src={`${item.image_url}`} alt={item.name} className="w-20 h-20 object-cover rounded-lg border border-red-900/80" />
                         </div>
                       ) : (
                         <div className="w-20 h-20 flex justify-center items-center rounded-lg border-2 border-red-900/80">
@@ -790,7 +791,7 @@ export default function ProductPage() {
               <div className="flex-1 flex justify-center items-center border border-gray-300 rounded-xl p-6 shadow-sm bg-white">
                 {selectedItem.image ? (
                   <img
-                    src={`${config.image_url}/${selectedItem.image}`}
+                    src={`${selectedItem.image_url}`}
                     alt={selectedItem.name}
                     className="max-h-64 object-contain rounded-lg shadow-md"
                   />
