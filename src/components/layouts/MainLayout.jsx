@@ -140,7 +140,7 @@ function Sidebar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
 
             {/* Scrollable navigation (mobile) */}
             <ScrollArea className="h-[calc(100vh-80px)] px-3 py-5">
-              <div className="flex flex-col">
+              <div className="flex flex-col w-[220px]">
                 {filteredNavItems.map((item) => (
                   <motion.div key={item.to} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <NavLink
@@ -185,7 +185,7 @@ function Sidebar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
 
             {/* Scrollable navigation (desktop) */}
             <ScrollArea className="h-[calc(100vh-80px)] px-4 py-5">
-              <div className="flex flex-col">
+              <div className="flex flex-col w-[220px]">
                 {filteredNavItems.map((item) => (
                   <motion.div key={item.to} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
                     <NavLink to={item.to} end className={({ isActive }) => navClasses(isActive)}>
