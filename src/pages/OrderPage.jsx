@@ -280,7 +280,7 @@ export default function OrdersPage() {
   if (!order?.id) return;
 
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/orders/${order.id}/invoice`, {
+    const res = await fetch(`https://mart-pos-api.onrender.com/api/orders/${order.id}/invoice`, {
       method: "GET",
       headers: { "Content-Type": "application/pdf" },
     });
