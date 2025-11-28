@@ -108,7 +108,6 @@ export default function PurchasePage() {
     }
   };
 
-  // ✅ Cancel all unsaved changes
   const handleCancel = () => {
     Swal.fire({
       title: "Cancel Purchase?",

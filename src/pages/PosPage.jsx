@@ -168,13 +168,13 @@ function PosPage() {
   };
 
   const handlePrintInvoice = () => {
-  if (!invoiceOrder) return Swal.fire("Nothing to print", "", "warning");
+    if (!invoiceOrder) return Swal.fire("Nothing to print", "", "warning");
 
-  const invoiceContent = document.getElementById("invoice-to-print")?.innerHTML;
-  if (!invoiceContent) return Swal.fire("Invoice not available", "", "warning");
+    const invoiceContent = document.getElementById("invoice-to-print")?.innerHTML;
+    if (!invoiceContent) return Swal.fire("Invoice not available", "", "warning");
 
-  const printWindow = window.open("", "_blank", "width=800,height=600");
-  printWindow.document.write(`
+    const printWindow = window.open("", "_blank", "width=800,height=600");
+    printWindow.document.write(`
     <html>
       <head>
         <title>Invoice - ${invoiceOrder.invoice_number}</title>
@@ -187,13 +187,13 @@ function PosPage() {
       </body>
     </html>
   `);
-  printWindow.document.close();
-  setTimeout(() => {
-    printWindow.focus();
-    printWindow.print();
-    printWindow.close();
-  }, 100); 
-};
+    printWindow.document.close();
+    setTimeout(() => {
+      printWindow.focus();
+      printWindow.print();
+      printWindow.close();
+    }, 100);
+  };
 
 
   const openOriginalPdf = () => {
@@ -458,8 +458,8 @@ function PosPage() {
             </div>
             <div className="flex-1 overflow-auto p-4 bg-gray-50 justify-center items-center flex">
               <div id="invoice-to-print" className="border border-gray-300 bg-white p-4">
-  <Invoice order={invoiceOrder} />
-</div>
+                <Invoice order={invoiceOrder} />
+              </div>
             </div>
           </div>
         </div>

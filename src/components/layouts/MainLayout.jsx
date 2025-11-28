@@ -1,7 +1,21 @@
-import { useState, useRef, useEffect, use } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+import { useState, useRef, useEffect } from "react";
 import { useNavigate, NavLink, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { HomeIcon, Menu, X, User, Box, FileBox, Store, ContactRound, ClipboardPlus, ClipboardMinus, UserStar } from "lucide-react";
+import {
+  HomeIcon,
+  Menu,
+  X,
+  User,
+  Box,
+  FileBox,
+  Store,
+  ContactRound,
+  ClipboardPlus,
+  ClipboardMinus,
+  UserStar,
+} from "lucide-react";
 import { MdBrandingWatermark } from "react-icons/md";
 import Logo from "../../assets/logo/Kh_Mart.png";
 import UserProfile from "../../assets/logo/user.png";
@@ -15,6 +29,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import { useSelector, useDispatch } from "react-redux";
 import { clearToken } from "@/store/authSlice";
 import { request } from "@/util/request/request";
@@ -54,35 +69,22 @@ function Sidebar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
     { to: "/product", label: "Product", icon: <Box size={20} /> },
     { to: "/brand", label: "Brand", icon: <MdBrandingWatermark size={20} /> },
     { to: "/category", label: "Category", icon: <FileBox size={20} /> },
-
     { to: "/supplier", label: "Supplier", icon: <ContactRound size={20} /> },
     { to: "/customer", label: "Customer", icon: <UserStar size={20} /> },
     { to: "/purchase", label: "Purchase", icon: <ContactRound size={20} /> },
     { to: "/purchase-report", label: "Purchase Report", icon: <ClipboardMinus size={20} /> },
     { to: "/order", label: "Order Report", icon: <ClipboardPlus size={20} /> },
-
     { to: "/user", label: "Users", icon: <User size={20} /> },
   ];
+
   const rolePermissions = {
-    admin: [
-      "Home", "POS", "Product", "Brand", "Category",
-      "Supplier", "Customer", "Purchase", "Purchase Report",
-      "Order Report", "Users"
-    ],
-    manager: [
-      "Home", "POS", "Product", "Brand", "Category",
-      "Supplier", "Customer", "Purchase", "Purchase Report",
-      "Order Report"
-    ],
-    sale: [
-      "Home", "POS", "Customer", "Order Report"
-    ],
+    admin: ["Home", "POS", "Product", "Brand", "Category", "Supplier", "Customer", "Purchase", "Purchase Report", "Order Report", "Users"],
+    manager: ["Home", "POS", "Product", "Brand", "Category", "Supplier", "Customer", "Purchase", "Purchase Report", "Order Report"],
+    sale: ["Home", "POS", "Customer", "Order Report"],
   };
 
   const filteredNavItems = user?.role
-    ? navItems.filter(item =>
-      rolePermissions[user.role]?.includes(item.label)
-    )
+    ? navItems.filter((item) => rolePermissions[user.role]?.includes(item.label))
     : [];
 
   useEffect(() => {
@@ -96,9 +98,10 @@ function Sidebar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
   }, [isOpen]);
 
   const navClasses = (isActive) =>
-    `flex items-center gap-3 transition-all duration-300 ${isActive
-      ? "bg-white/90 text-red-900 p-3 text-[18px] font-semibold m-2 rounded-xl shadow-md"
-      : "m-2 text-white/90 p-3 text-[18px] font-medium hover:bg-white/20 hover:text-white backdrop-blur-sm rounded-xl"
+    `flex items-center gap-3 transition-all duration-300 ${
+      isActive
+        ? "bg-white/90 text-red-900 p-3 text-[18px] font-semibold m-2 rounded-xl shadow-md"
+        : "m-2 text-white/90 p-3 text-[18px] font-medium hover:bg-white/20 hover:text-white backdrop-blur-sm rounded-xl"
     }`;
 
   const sidebarVariants = {
@@ -109,6 +112,7 @@ function Sidebar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
 
   return (
     <>
+      {/* MOBILE SIDEBAR */}
       <AnimatePresence>
         {isOpen && (
           <motion.aside
@@ -134,20 +138,23 @@ function Sidebar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
               </motion.button>
             </div>
 
-            <div className="py-5 flex flex-col px-3">
-              {filteredNavItems.map((item) => (
-                <motion.div key={item.to} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <NavLink
-                    to={item.to}
-                    end
-                    className={({ isActive }) => navClasses(isActive)}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.icon} {item.label}
-                  </NavLink>
-                </motion.div>
-              ))}
-            </div>
+            {/* Scrollable navigation (mobile) */}
+            <ScrollArea className="h-[calc(100vh-80px)] px-3 py-5">
+              <div className="flex flex-col">
+                {filteredNavItems.map((item) => (
+                  <motion.div key={item.to} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <NavLink
+                      to={item.to}
+                      end
+                      className={({ isActive }) => navClasses(isActive)}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.icon} {item.label}
+                    </NavLink>
+                  </motion.div>
+                ))}
+              </div>
+            </ScrollArea>
           </motion.aside>
         )}
       </AnimatePresence>
@@ -176,15 +183,18 @@ function Sidebar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
               </motion.button>
             </div>
 
-            <div className="py-5 flex flex-col px-4">
-              {filteredNavItems.map((item) => (
-                <motion.div key={item.to} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-                  <NavLink to={item.to} end className={({ isActive }) => navClasses(isActive)}>
-                    {item.icon} {item.label}
-                  </NavLink>
-                </motion.div>
-              ))}
-            </div>
+            {/* Scrollable navigation (desktop) */}
+            <ScrollArea className="h-[calc(100vh-80px)] px-4 py-5">
+              <div className="flex flex-col">
+                {filteredNavItems.map((item) => (
+                  <motion.div key={item.to} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+                    <NavLink to={item.to} end className={({ isActive }) => navClasses(isActive)}>
+                      {item.icon} {item.label}
+                    </NavLink>
+                  </motion.div>
+                ))}
+              </div>
+            </ScrollArea>
           </motion.aside>
         )}
       </AnimatePresence>
@@ -275,10 +285,10 @@ function MainLayout() {
 
           <div className="flex items-center gap-4">
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-2 rounded-full hover:bg-white/20 p-1 transition  cursor-pointer">
+              <DropdownMenuTrigger className="flex items-center gap-2 rounded-full hover:bg-white/20 p-1 transition cursor-pointer">
                 <img src={UserProfile} alt="Avatar" className="h-8 w-8 rounded-full object-cover" />
                 <span className="text-white font-medium hidden md:block">
-                  {loading ? "Loading..." : user?.name || "Guest"}<br />
+                  {loading ? "Loading..." : user?.name || "Guest"}
                 </span>
               </DropdownMenuTrigger>
 
@@ -308,6 +318,7 @@ function MainLayout() {
             </DropdownMenu>
           </div>
         </header>
+
         <main className="flex-1 w-full max-w-full p-3 md:p-6 bg-gray-100 rounded-tl-3xl shadow-inner overflow-x-auto">
           <Outlet />
         </main>
