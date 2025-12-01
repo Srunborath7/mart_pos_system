@@ -12,6 +12,7 @@ export default function Register() {
     password_confirmation: "",
     role: "",
   });
+  const [validate, setValidate] = useState({});
   const navigate = useNavigate();
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,6 +28,10 @@ export default function Register() {
 
     try {
       const res = await request("auth/register", "POST", form, null);
+      if (res?.errors) {
+          setValidate(res.errors);
+          return;
+      }
       Swal.fire("Success", "User Registered Successfully!", "success").then(() => {
         navigate("/auth/login");
       });
@@ -66,6 +71,7 @@ export default function Register() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block mb-1 text-sm font-semibold">Full Name</label>
+            {validate.name && <p className="text-white text-xs italic">{validate.name[0]}</p>}
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
               <UserPlus className="w-5 h-5 mr-2" />
               <input
@@ -81,6 +87,7 @@ export default function Register() {
           </div>
           <div>
             <label className="block mb-1 text-sm font-semibold">Email</label>
+            {validate.email && <p className="text-white text-xs italic">{validate.email[0]}</p>}
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
               <Mail className="w-5 h-5 mr-2" />
               <input
@@ -96,6 +103,7 @@ export default function Register() {
           </div>
           <div>
             <label className="block mb-1 text-sm font-semibold">Role</label>
+            {validate.role && <p className="text-white text-xs italic">{validate.role[0]}</p>}
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
               <Shield className="w-5 h-5 mr-2" />
               <select
@@ -114,6 +122,7 @@ export default function Register() {
           </div>
           <div>
             <label className="block mb-1 text-sm font-semibold">Password</label>
+            {validate.password && <p className="text-white text-xs italic">{validate.password[0]}</p>}
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
               <Lock className="w-5 h-5 mr-2" />
               <input
@@ -129,6 +138,7 @@ export default function Register() {
           </div>
           <div>
             <label className="block mb-1 text-sm font-semibold">Confirm Password</label>
+            {validate.password_confirmation && <p className="text-white text-xs italic">{validate.password_confirmation[0]}</p>}
             <div className="flex items-center bg-red-800/70 rounded-lg px-3 py-2">
               <Lock className="w-5 h-5 mr-2" />
               <input
